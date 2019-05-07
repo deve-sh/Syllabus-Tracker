@@ -1,0 +1,28 @@
+*{
+	box-sizing: border-box;
+}
+
+select{
+	display: inline-block;
+}
+
+body{
+	font-family: Arial,sans-serif;
+	line-height: 2;
+}
+
+#intro{
+	text-align: center;
+	padding: 1rem;
+}
+
+.loginform{
+	text-align: center;
+	padding: 1.3rem;
+	display: inline-block;
+	min-width: 60%;
+}
+
+.logincontainer{
+	text-align: center;
+}
