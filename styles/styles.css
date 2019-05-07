@@ -10,6 +10,11 @@ select{
 	display: inline-block;
 }
 
+.row{
+	padding: 0;
+	margin: 0;
+}
+
 body{
 	font-family: Arial,sans-serif;
 	line-height: 2;
@@ -35,11 +40,20 @@ body{
 	background: linear-gradient(to left, #0083B0, #1756f9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.image{
+	max-width: 40%;
+}
+
+.logincontainer{
+	text-align: center;
+	background: #f3f5f9;
+	padding: 1rem;
+}
+
 .loginform{
 	text-align: center;
 	padding: 2rem;
 	display: inline-block;
-	min-width: 25vw;
 	border: none;
 }
 
@@ -51,8 +65,20 @@ body{
 	text-align: left;
 }
 
-.logincontainer{
-	text-align: center;
+#nameinput{
+	background: #f9fafa;
+	border-bottom: none;
+	border: 0.1rem solid #d4d9dd;
+	padding-left: 0.35em;
+	border-radius: 0.2rem;
+}
+
+#nameinput:focus,#nameinput:active{
+	border-bottom: none;
+}
+
+.input-field{
+	border: 0.1rem solid #d4d9dd;
 }
 
 .fullwidthbutton{

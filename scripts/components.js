@@ -29,11 +29,12 @@ const select = (props = {placeholder:'',selectedIndex : 0 , options:[], classNam
 
 const intro = () => {
 	return `
+		<img src='https://deveshk.me/files/calit.png' class='image'/>
 		<h4 align='center'>
 			Track your progress!
 		</h4>
 		This is a web app to keep track of all the Computer Science Stuff going on in the college.
 		<br/>
-		And to also give you multiple references to learn stuff (Which will obviously be better than what the school provides. 😛).
+		And to also give you multiple references to learn stuff (Which will obviously be better than what the college provides. 😛).
 	`;	
 }

@@ -25,44 +25,55 @@ function showLoginScreen(){
 	let options = ["SY BSc CS"];
 
 	let loginHtml = 
-	`
-	<div id='intro'>
+	`<div id='intro'>
 		${intro()}
 	</div>
 	
-	<br/>
-	
-	<div class='logincontainer'>
-		<form class='loginform card' onSubmit="login(event)">
-			<h5>Login</h5>
-			${// Creating an input for the name.
-				input({
-				type:'text',
-				placeholder:'Name',
-				required:true,
-				className:'form-control',
-				id:'nameinput'
-			})}
-			<div align='left'>
-				<label class='formlabel'>Select your course</label>
+	<div class='logincontainer row'>
+		<div class='col-md-6' style='vertical-align:middle;'>
+			<br/>
+			<h5>
+				Just Login and Start Tacking.
+			</h5>
+			Its that simple.
+			<br/><br/>
+			<div align='center'>
+				<i class="fas fa-clipboard-check fa-10x"></i>
 			</div>
-			${// Creating a Select Field.
-				select({
-					options,
-					selectedIndex:0,
-					placeholder:'Select a Course',
-					className:'input-field'
-				})		
-			}
-			<br>
-			${ // Creating a Button
-				button({
-					type:'submit',
-					label:'login',
-					className:'btn btn-primary fullwidthbutton'
-				})
-			}
-		</form>
+		</div>
+		<div class='col-md-6'>
+			<form class='loginform card' onSubmit="login(event)">
+				<h5>Login</h5>
+				${// Creating an input for the name.
+					input({
+					type:'text',
+					placeholder:'Name',
+					required:true,
+					className:'form-control',
+					id:'nameinput'
+				})}
+				<div align='left'>
+					<label class='formlabel'>Select your course</label>
+				</div>
+				${// Creating a Select Field.
+					select({
+						options,
+						selectedIndex:0,
+						placeholder:'Select a Course',
+						className:'input-field'
+					})		
+				}
+				<br>
+				${ // Creating a Button
+					button({
+						type:'submit',
+						label:'login',
+						className:'btn btn-primary fullwidthbutton'
+					})
+				}
+			</form>
+		</div>
+		<br/>
 	</div>
 	`;
 
@@ -79,8 +90,40 @@ function login(event){
 	if(!localStorage.syllabusTracker){
 		// If the user is verified to not be logged in.
 
+		// Getting the field values.
+
+		let name,course;
+
+		try{
+			name = $("#nameinput").val();
+			course = $(".input-field")[0].selectedOptions[0].value;
+		}catch(err){
+			throw new Error(err);
+		}
+
+		let file = courseFiles[course.toString()].toString();
+
+		console.log(file);
+
+		// Running an XML HTTP Request to get the CS Syllabus for the course provided.
+
+		let xhr = new XMLHttpRequest();
+
+		xhr.open('GET',file,true);
+
+		xhr.onload = () => {
+			console.log(JSON.parse(xhr.responseText));
+		}
+
+		xhr.send();
 
 	}else{
 		throw new Error('Already Logged In.');
 	}
 }
+
+// An Object to store the files related to each course.
+
+var courseFiles = {
+	"SY BSc CS" : "./syllabi/sybsccs.json"
+};
