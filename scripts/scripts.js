@@ -1,6 +1,7 @@
 // Main JavaScript file to set up everything.
 // The project uses local storage so no one can view someone else's progress.
 // And a breach will never reveal anything else.
+// One downside is that there won't be any progress saved once the user resets or clears Local Storage.
 
 function isLoggedin(){
 	// Function to check if a user is already logged in.
@@ -32,24 +33,25 @@ function showLoginScreen(){
 	<br/>
 	
 	<div class='logincontainer'>
-		<form class='loginform' onSubmit="login()">
-			<h4>Login</h4>
-			
+		<form class='loginform card' onSubmit="login(event)">
+			<h5>Login</h5>
 			${// Creating an input for the name.
 				input({
 				type:'text',
 				placeholder:'Name',
 				required:true,
-				className:'form-control'
+				className:'form-control',
+				id:'nameinput'
 			})}
-
-			<br>
+			<div align='left'>
+				<label class='formlabel'>Select your course</label>
+			</div>
 			${// Creating a Select Field.
 				select({
 					options,
 					selectedIndex:0,
 					placeholder:'Select a Course',
-					className:'input-field col-md-6'
+					className:'input-field'
 				})		
 			}
 			<br>
@@ -57,7 +59,7 @@ function showLoginScreen(){
 				button({
 					type:'submit',
 					label:'login',
-					className:'btn btn-primary'
+					className:'btn btn-primary fullwidthbutton'
 				})
 			}
 		</form>
@@ -67,6 +69,18 @@ function showLoginScreen(){
 	$("#root").html(loginHtml);	// Set the innerHTML of the root node to the html string above.
 }
 
-function login(){
+function login(event){
 	// Function to login.
+
+	event.preventDefault();	// Prevent a page refresh.
+
+	// Rechecking if the user is logged in or not.
+
+	if(!localStorage.syllabusTracker){
+		// If the user is verified to not be logged in.
+
+
+	}else{
+		throw new Error('Already Logged In.');
+	}
 }

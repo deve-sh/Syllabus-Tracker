@@ -1,6 +1,10 @@
+/* Files for the Syllabus Progress Tracker. */
+
 *{
 	box-sizing: border-box;
 }
+
+/* Overwriting some styles from BootStrap and Materialize */
 
 select{
 	display: inline-block;
@@ -9,20 +13,50 @@ select{
 body{
 	font-family: Arial,sans-serif;
 	line-height: 2;
+	border: 0;
+}
+
+/*	Now time for the real components. */
+
+#root{
+	padding: 0;
+	width: 100%;
+	margin: 0;
+	min-height: 100%;
 }
 
 #intro{
 	text-align: center;
-	padding: 1rem;
+	padding: 4rem;
+	padding-bottom: 5rem;
+	color: #ffffff;
+	background: #0248ff ;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #0083B0, #1756f9);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #0083B0, #1756f9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .loginform{
 	text-align: center;
-	padding: 1.3rem;
+	padding: 2rem;
 	display: inline-block;
-	min-width: 60%;
+	min-width: 25vw;
+	border: none;
+}
+
+.formlabel{
+	display: inline-block;
+	color: gray;
+	font-size: 0.75em;
+	margin: 0;
+	text-align: left;
 }
 
 .logincontainer{
 	text-align: center;
+}
+
+.fullwidthbutton{
+	background: #15cd72;
+	color: #ffffff;
+	width: 100%;
 }
