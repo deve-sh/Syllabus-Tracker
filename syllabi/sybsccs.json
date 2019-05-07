@@ -9,32 +9,77 @@
 				"Lectures":48,
 				"isPractical":false,
 				"Credits":3,
-				"Code":"CSC2301"
+				"Code":"CSC2301",
+				"Sub-Units" : [
+					"Introduction to Data Structure and Algorithm Analysis",
+					"Linear Data Structures",
+					"Non-Linear Data Structures"
+				],
+				"References" : [
+
+				]
 			},
 			{
 				"Name":"Introduction to Web Technologies",
 				"Lectures":48,
 				"isPractical":false,
 				"Credits":3,
-				"Code":"CSC2302"
+				"Code":"CSC2302",
+				"Sub-Units" : [
+					"Introduction to Internet",
+					"Introduction to HTML5",
+					"Cascading Style Sheets(CSS)",
+					"JavaScript",
+					"XML",
+					"Emerging Trends in Web Technologies"
+				],
+				"References" : [
+
+				]
 			},
 			{
 				"Name":"Data Structures using C : Lab",
 				"isPractical":true,
 				"Lectures":10,
 				"Credits":2,
-				"Code":"CSC2303"
+				"Code":"CSC2303",
+				"Units" : [
+					"Sorting Technique( Insertion, Selection, Quick, Merge)",
+					"Polynomial manipulation using array",
+					"Stack",
+					"Queue",
+					"Linked list",
+					"Tree",
+					"Graph",
+					"Dynamic Implementation (Stack or Queue)",
+					"Tree Application : Heap Sort",
+					"Graph Traversals (BFS/DFS)"
+				]
 			},
 			{
 				"Name":"Intro to Web Technologies: Lab",
 				"isPractical":true,
 				"Lectures":10,
 				"Credits":0,
-				"Code":"CSC2304"
+				"Code":"CSC2304",
+				"Units" : [
+					"Creating Simple HTML5 pages",
+					"Advance HTML5- lists, frames",
+					"HTML forms",
+					"CSS I – Internal , Inline CSS",
+					"CSS II – External CSS",
+					"JavaScript – I (JavaScript basics, functions, Popup boxes)",
+					"JavaScript – II (Events, HTML DOM, DOM CSS)",
+					"XML",
+					"Case study I",
+					"Case Study II"
+				]
 			}
 		]
 	},
 	"Semester IV":{
+		"Units" : [
 
+		]
 	}
 }
