@@ -3,6 +3,12 @@
 // And a breach will never reveal anything else.
 // One downside is that there won't be any progress saved once the user resets or clears Local Storage.
 
+// Global Variables
+
+const options = ["SY BSc CS"];
+
+// Functions
+
 function isLoggedin(){
 	// Function to check if a user is already logged in.
 
@@ -21,8 +27,6 @@ function render(){
 
 function showLoginScreen(){
 	// Function to show login screen.
-
-	let options = ["SY BSc CS"];
 
 	let loginHtml = 
 	`<div id='intro'>

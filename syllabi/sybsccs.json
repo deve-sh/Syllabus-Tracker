@@ -2,10 +2,39 @@
 	"Year":"2019-20",
 	"Course":"SY BSc cS",
 	"Subject":"Computer Science",
-	"Semester I":{
-
+	"Semester III":{
+		"Units" : [
+			{
+				"Name":"Data Structures using C",
+				"Lectures":48,
+				"isPractical":false,
+				"Credits":3,
+				"Code":"CSC2301"
+			},
+			{
+				"Name":"Introduction to Web Technologies",
+				"Lectures":48,
+				"isPractical":false,
+				"Credits":3,
+				"Code":"CSC2302"
+			},
+			{
+				"Name":"Data Structures using C : Lab",
+				"isPractical":true,
+				"Lectures":10,
+				"Credits":2,
+				"Code":"CSC2303"
+			},
+			{
+				"Name":"Intro to Web Technologies: Lab",
+				"isPractical":true,
+				"Lectures":10,
+				"Credits":0,
+				"Code":"CSC2304"
+			}
+		]
 	},
-	"Semester II":{
+	"Semester IV":{
 
 	}
 }
