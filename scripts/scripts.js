@@ -36,12 +36,12 @@ function showLoginScreen(){
 				Just Login and Start Tacking.
 			</h5>
 			Its that simple.
-			<br/><br/>
-			<div align='center'>
-				<i class="fas fa-clipboard-check fa-10x"></i>
-			</div>
+			<br/>
+			<br/>
+			<i class="fas fa-clipboard-check fa-10x"></i>
 		</div>
 		<div class='col-md-6'>
+			<br/>
 			<form class='loginform card' onSubmit="login(event)">
 				<h5>Login</h5>
 				${// Creating an input for the name.

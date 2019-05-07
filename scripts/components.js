@@ -29,7 +29,7 @@ const select = (props = {placeholder:'',selectedIndex : 0 , options:[], classNam
 
 const intro = () => {
 	return `
-		<img src='https://deveshk.me/files/calit.png' class='image'/>
+		<img src='https://deveshk.me/files/calit.png' class='col-md-5'/>
 		<h4 align='center'>
 			Track your progress!
 		</h4>
