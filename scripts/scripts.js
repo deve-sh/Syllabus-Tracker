@@ -7,6 +7,12 @@
 
 const options = ["SY BSc CS"];
 
+// An Object to store the files related to each course.
+
+const courseFiles = {
+	"SY BSc CS" : "./syllabi/sybsccs.json"
+};
+
 // Functions
 
 function isLoggedin(){
@@ -22,6 +28,7 @@ function isLoggedin(){
 
 function render(){
 	// Function to render the progress of a user.
+
 	return;
 }
 
@@ -37,9 +44,9 @@ function showLoginScreen(){
 		<div class='col-md-6' style='vertical-align:middle;'>
 			<br/>
 			<h5>
-				Just Login and Start Tacking.
+				Just Login and Start Tracking.
 			</h5>
-			Its that simple.
+			It's that simple.
 			<br/>
 			<br/>
 			<i class="fas fa-clipboard-check fa-10x"></i>
@@ -101,13 +108,15 @@ function login(event){
 		try{
 			name = $("#nameinput").val();
 			course = $(".input-field")[0].selectedOptions[0].value;
+
+			if(!name || !course){
+				throw new Error('Invalid Field Values.');
+			}
 		}catch(err){
 			throw new Error(err);
 		}
 
 		let file = courseFiles[course.toString()].toString();
-
-		console.log(file);
 
 		// Running an XML HTTP Request to get the CS Syllabus for the course provided.
 
@@ -115,19 +124,43 @@ function login(event){
 
 		xhr.open('GET',file,true);
 
-		xhr.onload = () => {
-			console.log(JSON.parse(xhr.responseText));
-		}
-
 		xhr.send();
 
+		xhr.onreadystatechange = () => {
+			if(xhr.status!=200){
+				throw new Error('Error in fetching syllabus.');
+			}
+
+			if(xhr.readyState === 4){
+				// Now ready to log the user in.
+
+				let syllabus = JSON.parse(xhr.responseText);
+
+				// Adding an isComplete tag to each chapter.
+
+				for(let i in syllabus){
+				    if(syllabus.hasOwnProperty(i)){
+				        for(let j in syllabus[i]["Units"]){
+							if(syllabus[i]["Units"][j].isPractical===false){
+				            	// Practicals are not tracked. Just listed.
+								syllabus[i]["Units"][j]["Sub-Units"] = syllabus[i]["Units"][j]["Sub-Units"].map((subUnit) => {
+									subUnit.isComplete = false;
+									return subUnit;
+								});
+				            }
+				        }
+				    }
+				}
+
+				syllabus.userName = name;
+
+				// Authentication Object complete.
+				// Now Storing it in Local Storage.
+
+				localStorage.syllabusTracker = syllabus;
+			}
+		}
 	}else{
 		throw new Error('Already Logged In.');
 	}
 }
-
-// An Object to store the files related to each course.
-
-var courseFiles = {
-	"SY BSc CS" : "./syllabi/sybsccs.json"
-};

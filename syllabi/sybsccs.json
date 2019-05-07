@@ -11,9 +11,9 @@
 				"Credits":3,
 				"Code":"CSC2301",
 				"Sub-Units" : [
-					"Introduction to Data Structure and Algorithm Analysis",
-					"Linear Data Structures",
-					"Non-Linear Data Structures"
+					{"Name":"Introduction to Data Structure and Algorithm Analysis"},
+					{"Name":"Linear Data Structures"},
+					{"Name":"Non-Linear Data Structures"}
 				],
 				"References" : [
 
@@ -26,12 +26,12 @@
 				"Credits":3,
 				"Code":"CSC2302",
 				"Sub-Units" : [
-					"Introduction to Internet",
-					"Introduction to HTML5",
-					"Cascading Style Sheets(CSS)",
-					"JavaScript",
-					"XML",
-					"Emerging Trends in Web Technologies"
+					{"Name":"Introduction to Internet"},
+					{"Name":"Introduction to HTML5"},
+					{"Name":"Cascading Style Sheets(CSS)"},
+					{"Name":"JavaScript"},
+					{"Name":"XML"},
+					{"Name":"Emerging Trends in Web Technologies"}
 				],
 				"References" : [
 
