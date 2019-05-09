@@ -283,7 +283,43 @@ function login(event){
 function registerCompletion(event){
 	// Function to register a done receipt to a particular course.
 
-	let unitid = event.target();
+	if(!localStorage.getItem('syllabusTracker')){
+		throw new Error('Not Logged In.');
+	}
+
+	if(event.target.type==='checkbox'){
+		let unitid = event.target.parentElement.parentElement.parentElement.getAttribute('unitid');
+
+		let isComplete = false;
+
+		if(event.target.checked === true){
+			isComplete = true;
+		}
+
+		// Searching for the unit.
+
+		let syllabus = JSON.parse(localStorage.getItem('syllabusTracker'));
+
+		for(let i in syllabus){
+		    if(syllabus.hasOwnProperty(i)){
+		        for(let j in syllabus[i]["Units"]){
+					if(syllabus[i]["Units"][j].isPractical===false){
+		            	// Practicals are not tracked. Just listed.
+						for(let k in syllabus[i]["Units"][j]["Sub-Units"]){
+							if(syllabus[i]["Units"][j]["Sub-Units"][k]["unitid"]===Number(unitid)){
+								// If unitid matches
+								syllabus[i]["Units"][j]["Sub-Units"][k]["isComplete"] = isComplete;	// Set the work done.
+							}
+						}
+		            }
+		        }
+		    }
+		}
+
+		// Set the new localStorage item.
+
+		localStorage.setItem('syllabusTracker',JSON.stringify(syllabus));
+	}	
 }
 
 function reset(){
