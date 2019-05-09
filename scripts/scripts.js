@@ -3,22 +3,27 @@
 // And a breach will never reveal anything else.
 // One downside is that there won't be any progress saved once the user resets or clears Local Storage.
 
+// ----------------
 // Global Variables
+// ----------------
 
-const options = ["SY BSc CS"];
+const options = Object.freeze(["SY BSc CS"]);	// Change this array if you need to add more Courses.
 
 // An Object to store the files related to each course.
 
-const courseFiles = {
+const courseFiles = Object.freeze({
 	"SY BSc CS" : "./syllabi/sybsccs.json"
-};
+});		// Change this Object if you need to add more course files.
 
+// In the above variables the Object.freeze method has been used so that they can only be used for accessing and not start unauthorised HTTP requests to sources.
+
+// ----------
 // Functions
+// ----------
 
 function isLoggedin(){
 	// Function to check if a user is already logged in.
-
-	if(localStorage.syllabusTracker){
+	if(localStorage.getItem('syllabusTracker')){
 		// If syllabusTracker object has been initalized.
 		render();	// Call the render function to render the progress of the user.
 	}else{
@@ -28,6 +33,70 @@ function isLoggedin(){
 
 function render(){
 	// Function to render the progress of a user.
+	
+	if(localStorage.getItem('syllabusTracker')){
+		let userdata = JSON.parse(localStorage.getItem('syllabusTracker'));
+
+		// User Variables
+
+		let userName = userdata.userName;
+		let year = userdata.Year;
+		let course = userdata.Course;
+
+		// Creating a Render String. Starting with the Intro Tile.
+
+		let toRender = `${userHeader({userName,year,course})}`;	// String that will be displayed.
+
+		let counter = 0;					// A counter variable to assign the ids to each list item.
+
+		for(let semester in userdata){
+			if(semester.indexOf('Semester')!==-1){
+				if(userdata.hasOwnProperty(semester)){
+					toRender += `${semester}
+					<br/> 
+					<ul class='semester'>`;
+
+					// If the word Semester is present.
+					// Start a loop to print it.
+
+					// Now this is gonna get messy as hell. But still, fun!
+
+					for(let unit in userdata[semester]["Units"]){
+						if(userdata[semester]["Units"].hasOwnProperty(unit)){
+							let unitvar = userdata[semester]["Units"][unit];
+
+							toRender += `<ul class='unit'>`;
+
+							for(let subunit in unitvar["Sub-Units"]){
+								toRender += `
+								<li class='subunit' unitid='${counter}'>
+									<div class='left'>
+										${unitvar["Sub-Units"][subunit]["Name"]}
+									</div>
+									<div class='right'>
+										${unitvar["Sub-Units"][subunit]["isComplete"]===false?"Not Complete":"Complete"}
+									</div>
+								</li>
+								<br>
+								`;
+
+								counter++;
+							}
+
+							toRender += `</ul>`;
+						}
+					}
+
+					toRender += `</ul>`	// Close the unordered list.
+				}
+			}
+		}
+
+		$("#root").html(toRender);	// Set the HTML of the Root Component to toRender string.
+	}
+	else{
+		showLoginScreen();	// Show the login screen again if the user isn't logged in.
+	}
 
 	return;
 }
@@ -154,10 +223,21 @@ function login(event){
 
 				syllabus.userName = name;
 
+				syllabus = JSON.stringify(syllabus);
+
 				// Authentication Object complete.
 				// Now Storing it in Local Storage.
 
-				localStorage.syllabusTracker = syllabus;
+				try{
+					localStorage.setItem('syllabusTracker',syllabus);
+				}
+				catch(err){
+					throw new Error(err);
+				}
+
+				// Everything successful till now. Show a logged in screen then.
+
+				render();	// Call the render function to print the progress of the user.
 			}
 		}
 	}else{

@@ -38,3 +38,15 @@ const intro = () => {
 		And to also give you multiple references to learn stuff (Which will obviously be better than what the college provides. 😛).
 	`;	
 }
+
+// User Header Component
+
+const userHeader = (props = {userName:'',year:'2019-20',course:''}) => {
+	return `
+	<div class='userHeader'>
+		<div class='userName'>Hey ${props.userName}</div>
+		<div class='useryear'>Year : <span class='year'>${props.year}</span></div>
+		<div class='usercourse'>Course : <span class='course'>${props.course}</span></div>
+	</div>
+	`;
+}
