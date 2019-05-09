@@ -43,7 +43,7 @@
 				"Lectures":10,
 				"Credits":2,
 				"Code":"CSC2303",
-				"Units" : [
+				"Sub-Units" : [
 					"Sorting Technique( Insertion, Selection, Quick, Merge)",
 					"Polynomial manipulation using array",
 					"Stack",
@@ -62,7 +62,7 @@
 				"Lectures":10,
 				"Credits":0,
 				"Code":"CSC2304",
-				"Units" : [
+				"Sub-Units" : [
 					"Creating Simple HTML5 pages",
 					"Advance HTML5- lists, frames",
 					"HTML forms",
@@ -78,8 +78,5 @@
 		]
 	},
 	"Semester IV":{
-		"Units" : [
-
-		]
 	}
 }

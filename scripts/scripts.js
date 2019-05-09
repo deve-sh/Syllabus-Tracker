@@ -23,6 +23,8 @@ const courseFiles = Object.freeze({
 
 function isLoggedin(){
 	// Function to check if a user is already logged in.
+	// Master Controller.
+	
 	if(localStorage.getItem('syllabusTracker')){
 		// If syllabusTracker object has been initalized.
 		render();	// Call the render function to render the progress of the user.
@@ -51,43 +53,52 @@ function render(){
 
 		for(let semester in userdata){
 			if(semester.indexOf('Semester')!==-1){
-				if(userdata.hasOwnProperty(semester)){
-					toRender += `${semester}
-					<br/> 
-					<ul class='semester'>`;
 
-					// If the word Semester is present.
-					// Start a loop to print it.
+				if(Object.keys(semester).length <= 0){
+					toRender += `${semester} : No Content in The Semester Available.`;
+				}
+				else{
+					if(userdata.hasOwnProperty(semester)){
+						toRender += `${semester}
+						<br/> 
+						<ul class='semester'>`;
 
-					// Now this is gonna get messy as hell. But still, fun!
+						// If the word Semester is present.
+						// Start a loop to print it.
 
-					for(let unit in userdata[semester]["Units"]){
-						if(userdata[semester]["Units"].hasOwnProperty(unit)){
-							let unitvar = userdata[semester]["Units"][unit];
+						// Now this is gonna get messy as hell. But still, fun!
 
-							toRender += `<ul class='unit'>`;
+						for(let unit in userdata[semester]["Units"]){
 
-							for(let subunit in unitvar["Sub-Units"]){
-								toRender += `
-								<li class='subunit' unitid='${counter}'>
-									<div class='left'>
-										${unitvar["Sub-Units"][subunit]["Name"]}
-									</div>
-									<div class='right'>
-										${unitvar["Sub-Units"][subunit]["isComplete"]===false?"Not Complete":"Complete"}
-									</div>
-								</li>
-								<br>
-								`;
+							toRender += `<div class='subjectname'>${userdata[semester]["Units"][unit]['Name']}</div>`;
 
-								counter++;
+							if(userdata[semester]["Units"].hasOwnProperty(unit)){
+								let unitvar = userdata[semester]["Units"][unit];
+
+								toRender += `<ul>`;
+
+								for(let subunit in unitvar["Sub-Units"]){
+									toRender += `
+									<li class='subunit' unitid='${counter}'>
+										<div class='left'>
+											${(unitvar['isPractical']===false)?unitvar["Sub-Units"][subunit]["Name"]:unitvar["Sub-Units"][subunit]}
+										</div>
+										<div class='right'>
+											${(unitvar["isPractical"]===true)?"":(unitvar["Sub-Units"][subunit]["isComplete"]===false)?"Not Complete":"Complete"}
+										</div>
+									</li>
+									<br>
+									`;
+
+									counter++;
+								}
+
+								toRender += `</ul><br>`;
 							}
-
-							toRender += `</ul>`;
 						}
-					}
 
-					toRender += `</ul>`	// Close the unordered list.
+						toRender += `</ul>`	// Close the unordered list.
+					}
 				}
 			}
 		}

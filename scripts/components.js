@@ -29,7 +29,11 @@ const select = (props = {placeholder:'',selectedIndex : 0 , options:[], classNam
 
 const intro = () => {
 	return `
-		<img src='https://deveshk.me/files/calit.png' class='col-md-5'/>
+		<div align='center'>
+			<div class='col-md-5'>
+				<img src='./files/screen.png' class='shadowed image'/>
+			</div>
+		</div>
 		<h4 align='center'>
 			Track your progress!
 		</h4>
