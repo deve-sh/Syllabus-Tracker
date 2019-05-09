@@ -1,5 +1,6 @@
 // Main JavaScript file to set up everything.
 // The project uses local storage so no one can view someone else's progress.
+// The max size that will be occupied on Local Storage is probably going to be at max 50KB.
 // And a breach will never reveal anything else.
 // One downside is that there won't be any progress saved once the user resets or clears Local Storage.
 
@@ -82,7 +83,7 @@ function render(){
 				else{
 					if(userdata.hasOwnProperty(semester)){
 						toRender += `<div class='semestername'>${semester}</div>
-						<div class='semester'>`;
+						<div class='semester'><br>`;
 
 						// If the word Semester is present.
 						// Start a loop to print it.
@@ -91,7 +92,7 @@ function render(){
 
 						for(let unit in userdata[semester]["Units"]){
 
-							toRender += `<br><div class='subjectname'>${userdata[semester]["Units"][unit]['Name']}</div>`;
+							toRender += `<div class='subjectname'>${userdata[semester]["Units"][unit]['Name']}</div>`;
 
 							if(userdata[semester]["Units"].hasOwnProperty(unit)){
 								let unitvar = userdata[semester]["Units"][unit];
@@ -276,5 +277,20 @@ function login(event){
 		}
 	}else{
 		throw new Error('Already Logged In.');
+	}
+}
+
+function reset(){
+	// Function to reset/logout.
+
+	console.log(this.callee);
+
+	if(!localStorage.getItem('syllabusTracker')){
+		throw new Error("Already Logged Out.");
+	}else{
+		if(confirm("Are you sure you want to reset/logout?")){
+			localStorage.clear();	// Clear all the localStorage data for the particular page.
+			showLoginScreen();	// Render the login screen again.
+		}
 	}
 }

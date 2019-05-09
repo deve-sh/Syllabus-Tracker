@@ -100,6 +100,7 @@ body{
 
 .semester{
 	padding: 0 1rem;
+	background: linear-gradient(135deg, #ffffff 50%, #2c96df 50%);
 }
 
 .semestername{
