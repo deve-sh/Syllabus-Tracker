@@ -116,6 +116,7 @@ ul{
 ul li{
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	height: auto;
+	display: flex;
 	margin: 0;
 	background: #262a2c;
 	color: #fff;
@@ -124,7 +125,18 @@ ul li{
 }
 
 ul > li > .left, ul > li > .right{
+	flex: 1;
+	vertical-align: middle;
+}
+
+ul > li > .right{
+	text-align: right;
 	padding: 1rem;
+}
+
+ul > li > .left{
+	padding: 1.2rem;
+	text-align: left;
 }
 
 .semestername{
@@ -168,4 +180,11 @@ ul > li > .left, ul > li > .right{
 	padding: 0.5rem;
 	background: #2c96df;
 	text-align: center;
+}
+
+[type="checkbox"]+span:not(.lever){
+	display: inline;
+	margin: 0;
+	line-height: 2;
+	height: auto;
 }

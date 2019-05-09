@@ -1,6 +1,6 @@
 // Main JavaScript file to set up everything.
 // The project uses local storage so no one can view someone else's progress.
-// The max size that will be occupied on Local Storage is probably going to be at max 50KB.
+// The max size that will be occupied on Local Storage is probably going to be at max 10 to 15 KB.
 // And a breach will never reveal anything else.
 // One downside is that there won't be any progress saved once the user resets or clears Local Storage.
 
@@ -106,7 +106,7 @@ function render(){
 											${(unitvar['isPractical']===false)?unitvar["Sub-Units"][subunit]["Name"]:unitvar["Sub-Units"][subunit]}
 										</div>
 										<div class='right'>
-											${(unitvar["isPractical"]===true)?"":(unitvar["Sub-Units"][subunit]["isComplete"]===false)?"Not Complete":"Complete"}
+											${(unitvar["isPractical"]===true)?"":(unitvar["Sub-Units"][subunit]["isComplete"]===false)?"<label><input type='checkbox' onclick='registerCompletion(event)'/><span></span></label>":"<label><input type='checkbox' checked='checked' onclick='registerCompletion(event)'/><span></span></label>"}
 										</div>
 									</li><br>
 									`;
@@ -278,6 +278,12 @@ function login(event){
 	}else{
 		throw new Error('Already Logged In.');
 	}
+}
+
+function registerCompletion(event){
+	// Function to register a done receipt to a particular course.
+
+	let unitid = event.target();
 }
 
 function reset(){
