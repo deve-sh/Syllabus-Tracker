@@ -283,8 +283,6 @@ function login(event){
 function reset(){
 	// Function to reset/logout.
 
-	console.log(this.callee);
-
 	if(!localStorage.getItem('syllabusTracker')){
 		throw new Error("Already Logged Out.");
 	}else{

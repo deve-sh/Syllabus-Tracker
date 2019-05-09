@@ -57,6 +57,7 @@ const userHeader = (props = {userName:'',year:'2019-20',course:'',progress:0,cou
 			${(props.progress/props.count)*100}%
 		</div>
 		<br/>
+		<div align='center'><button onclick="reset()" class='btn btn-danger' style='background: red;'>Reset/Logout</button></div>
 		Your Syllabus : 
 	</div>
 	`;
