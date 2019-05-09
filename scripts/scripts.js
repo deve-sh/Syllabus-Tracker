@@ -44,24 +44,45 @@ function render(){
 		let userName = userdata.userName;
 		let year = userdata.Year;
 		let course = userdata.Course;
+		let progress = 0;
+		let count = 1;
 
+		// Calculating the progress of the user.
+		// Sorry this takes 3 for loops, but the execution is fast enough, no worries.
+
+		for(let semester in userdata){
+			if(semester.indexOf('Semester')!==-1){
+				if(Object.keys(userdata[semester]).length > 0){
+					for(let unit in userdata[semester]["Units"]){
+						if(userdata[semester]["Units"][unit].hasOwnProperty("Sub-Units") && userdata[semester]["Units"][unit].isPractical === false){
+							for(let i = 0;i<userdata[semester]["Units"][unit]["Sub-Units"].length;i++){
+								if(userdata[semester]["Units"][unit]["Sub-Units"][i].isComplete === true)
+									progress++;
+								count++;
+							}
+						}
+					}
+				}
+			}
+		}
+		
 		// Creating a Render String. Starting with the Intro Tile.
 
-		let toRender = `${userHeader({userName,year,course})}`;	// String that will be displayed.
+		let toRender = `${userHeader({userName,year,course,progress,count})}`;	// String that will be displayed.
 
 		let counter = 0;					// A counter variable to assign the ids to each list item.
 
 		for(let semester in userdata){
 			if(semester.indexOf('Semester')!==-1){
-
-				if(Object.keys(semester).length <= 0){
-					toRender += `${semester} : No Content in The Semester Available.`;
+				if(Object.keys(userdata[semester]).length <= 0){
+					// Don't waste time on another round of for loops if no units are specified.
+					toRender += `<div class='semestername'>${semester}</div>
+								<br/><span class='nocontent'>No Content in The Semester Available.</span><br/>`;
 				}
 				else{
 					if(userdata.hasOwnProperty(semester)){
-						toRender += `${semester}
-						<br/> 
-						<ul class='semester'>`;
+						toRender += `<div class='semestername'>${semester}</div>
+						<div class='semester'>`;
 
 						// If the word Semester is present.
 						// Start a loop to print it.
@@ -70,12 +91,12 @@ function render(){
 
 						for(let unit in userdata[semester]["Units"]){
 
-							toRender += `<div class='subjectname'>${userdata[semester]["Units"][unit]['Name']}</div>`;
+							toRender += `<br><div class='subjectname'>${userdata[semester]["Units"][unit]['Name']}</div>`;
 
 							if(userdata[semester]["Units"].hasOwnProperty(unit)){
 								let unitvar = userdata[semester]["Units"][unit];
 
-								toRender += `<ul>`;
+								toRender += `<ul class='subunits'>`;
 
 								for(let subunit in unitvar["Sub-Units"]){
 									toRender += `
@@ -86,18 +107,17 @@ function render(){
 										<div class='right'>
 											${(unitvar["isPractical"]===true)?"":(unitvar["Sub-Units"][subunit]["isComplete"]===false)?"Not Complete":"Complete"}
 										</div>
-									</li>
-									<br>
+									</li><br>
 									`;
 
 									counter++;
 								}
 
-								toRender += `</ul><br>`;
+								toRender += `</ul>`;
 							}
 						}
 
-						toRender += `</ul>`	// Close the unordered list.
+						toRender += `</div>`	// Close the unordered list.
 					}
 				}
 			}
@@ -218,6 +238,8 @@ function login(event){
 
 				// Adding an isComplete tag to each chapter.
 
+				let counter = 0;	// Variable to later assign unit ids to the subunits.
+
 				for(let i in syllabus){
 				    if(syllabus.hasOwnProperty(i)){
 				        for(let j in syllabus[i]["Units"]){
@@ -225,6 +247,7 @@ function login(event){
 				            	// Practicals are not tracked. Just listed.
 								syllabus[i]["Units"][j]["Sub-Units"] = syllabus[i]["Units"][j]["Sub-Units"].map((subUnit) => {
 									subUnit.isComplete = false;
+									subUnit.unitid = (counter++);
 									return subUnit;
 								});
 				            }

@@ -90,3 +90,81 @@ body{
 	color: #ffffff;
 	width: 100%;
 }
+
+/* Syllabus Styles */
+
+.subjectname{
+	font-size: 1.8em;
+	font-weight: normal;
+}
+
+.semester{
+	padding: 0 1rem;
+}
+
+.semestername{
+	background: #ffffff;
+	color: #000;
+}
+
+ul{
+	padding: 1rem;
+	padding-left: 1rem !important;
+}
+
+ul li{
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	height: auto;
+	margin: 0;
+	background: #262a2c;
+	color: #fff;
+	overflow: hidden;
+	border-radius: 0.15rem;
+}
+
+ul > li > .left, ul > li > .right{
+	padding: 1rem;
+}
+
+.semestername{
+	padding: 1rem;
+	font-size: 1.9em;
+	font-weight: bolder;
+	display: block;
+	background: #fff;
+	color: #000;
+	border-bottom: 0.05rem solid darkgray;
+}
+
+.nocontent{
+	text-align: center;
+	display: block;
+}
+
+/* User Header Styles */
+
+.userHeader{
+	padding: 2rem;
+	border-top: 0.5rem solid #04bd8a;
+	background: #111518;
+	color: #ffffff;
+}
+
+.userName{
+	font-size: 1.3em;
+}
+
+.year{
+	font-weight: bold;
+}
+
+.course{
+	font-weight: bold;
+}
+
+.userprogress{
+	border-radius: 0.15rem;
+	padding: 0.5rem;
+	background: #2c96df;
+	text-align: center;
+}

@@ -45,12 +45,19 @@ const intro = () => {
 
 // User Header Component
 
-const userHeader = (props = {userName:'',year:'2019-20',course:''}) => {
+const userHeader = (props = {userName:'',year:'2019-20',course:'',progress:0,count:1}) => {
 	return `
 	<div class='userHeader'>
 		<div class='userName'>Hey ${props.userName}</div>
 		<div class='useryear'>Year : <span class='year'>${props.year}</span></div>
 		<div class='usercourse'>Course : <span class='course'>${props.course}</span></div>
+		<br/>
+		Progress : 
+		<div class='userprogress' style='background : linear-gradient(90deg, #0d78cc ${(props.progress/props.count)*100}%, #2c96df ${(props.progress/props.count)*100}%'>
+			${(props.progress/props.count)*100}%
+		</div>
+		<br/>
+		Your Syllabus : 
 	</div>
 	`;
 }
