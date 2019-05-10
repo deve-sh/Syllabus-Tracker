@@ -119,3 +119,73 @@ const progressBar = (userdata) => {
 
 	// This will render the progress bar.
 }
+
+const referenceModal = (event) => {
+	// Validating Event.
+
+	if(!localStorage.getItem('syllabusTracker') || !event.target.parentElement.classList.contains('subjectname'))
+		throw new Error('Invalid Event.');
+
+	let subjectname = event.target.textContent;
+
+	let references = [];	// Array of references.
+
+	// Searching for the subject's referencelist;
+
+	let syllabus = JSON.parse(localStorage.getItem('syllabusTracker'));
+
+	for(let semester in syllabus){
+		if(syllabus.hasOwnProperty(semester)){
+			if(semester.indexOf('Semester') !== -1 && syllabus[semester].hasOwnProperty('Units')){
+				for(let unit in syllabus[semester]['Units']){
+					if(syllabus[semester]['Units'][unit]["Name"] === subjectname){
+						references = syllabus[semester]['Units'][unit]["References"];
+					}
+				}
+			}
+		}
+	}
+
+	// Modal Box for displaying References for a subject.
+
+	if(document.getElementById('modalBox')){
+		document.getElementById('modalBox').parentElement.removeChild(document.getElementById('modalBox'));
+	}
+
+	let modalNode = document.createElement('div');	// New node for the modal.
+
+	// Removing any previous instance of modalbox before.
+
+	let referencesHTML = ``;
+
+	if(references.length === 0)
+		referencesHTML = `<span>No References Listed for this subject.</span>`;
+	else{
+		// If there are references found. render them.
+		referencesHTML += `<div> References found : </div>`;
+		for(let i in references){
+			referencesHTML += `<span><a href='${references[i]}' target='_blank'>${references[i]}</a></span>`;
+		}
+	}
+
+	// Adding the classes necessary.
+
+	modalNode.classList.add('modalclass');
+	modalNode.id = "modalBox";
+
+	modalNode.innerHTML = `
+	<div class='modalContent'>
+		<div class="modalHeader">
+		    <span class='heading'>References for the subject</span>
+		    <span class="close" onclick='closeModal()'>&times;</span>
+	    </div>
+	    <div class="modalBody">
+		    ${referencesHTML}
+	    </div>
+	</div>
+	`;	// Adding the necessary stuff to the modal Node.
+
+	document.getElementsByTagName('body')[0].appendChild(modalNode);
+
+	openModal();
+}

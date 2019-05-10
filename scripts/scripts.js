@@ -71,7 +71,7 @@ function render(){
 
 						for(let unit in userdata[semester]["Units"]){
 
-							toRender += `<div class='subjectname'>${userdata[semester]["Units"][unit]['Name']}</div>`;
+							toRender += `<div class='subjectname'><span ${(userdata[semester]["Units"][unit]['isPractical']===false)?"onclick='referenceModal(event)'":""}>${userdata[semester]["Units"][unit]['Name']}</span></div>`;
 
 							if(userdata[semester]["Units"].hasOwnProperty(unit)){
 								let unitvar = userdata[semester]["Units"][unit];
@@ -320,5 +320,29 @@ function reset(){
 			localStorage.clear();	// Clear all the localStorage data for the particular page.
 			showLoginScreen();	// Render the login screen again.
 		}
+	}
+}
+
+// Function to open Modal Box for references.
+
+function openModal(){
+	if(document.getElementById('modalBox')){
+		document.getElementById('modalBox').style.display = "block";
+	}
+}
+
+// When the user clicks anywhere outside of the modal, close it
+
+window.onclick = function(event) {
+  if (event.target == document.getElementById('modalBox')) {
+    document.getElementById('modalBox').style.display = "none";
+  }
+}
+
+// Close Button
+
+function closeModal(){
+	if(document.getElementById('modalBox')){
+		document.getElementById('modalBox').style.display = "none";
 	}
 }
