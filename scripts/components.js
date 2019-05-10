@@ -56,7 +56,7 @@ const userHeader = (props = {userName:'',year:'2019-20',course:'',progress:0,cou
 		<div class='useryear'>Year : <span class='year'>${props.year}</span></div>
 		<div class='usercourse'>Course : <span class='course'>${props.course}</span></div>
 		<div id='progressbar'></div>
-		<div align='center'><button onclick="reset()" class='btn btn-danger' style='background: red;'>Reset / Logout</button></div>
+		<div align='center'><button onclick="reset()" class='btn btn-danger' style='background: red;'><i class="fas fa-door-open"></i> Reset </button></div>
 		Your Syllabus : 
 	</div>
 	`;

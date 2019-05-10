@@ -1,4 +1,4 @@
-/* Files for the Syllabus Progress Tracker. */
+/* Styles for the Syllabus Progress Tracker. */
 
 *{
 	box-sizing: border-box;
@@ -53,6 +53,7 @@ body{
 	text-align: center;
 	background: #f3f5f9;
 	padding: 1rem;
+	padding-bottom: 3.5rem;
 }
 
 .loginform{
@@ -247,6 +248,32 @@ ul > li > .left{
 }
 
 .modalBody{
+	padding: 1rem;
+}
+
+/* Footer */
+
+footer{
+	background: #212121;
+	padding: 1.4rem;
+	color: #fff;
+	padding: 0.8rem;
+	border-bottom: 0.6rem solid #191919;
+}
+
+footer a, footer a:hover, footer a:active, footer a:active{
+	text-decoration: none;
+	color: #ffffff;
+}
+
+footer .col-xs-9{
+	width: 75%;
+	padding: 1rem;
+}
+
+footer .col-xs-3{
+	width: 25%;
+	text-align: right;
 	padding: 1rem;
 }
 
