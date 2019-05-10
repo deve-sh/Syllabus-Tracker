@@ -147,4 +147,8 @@ For issues, just raise an issue in the repository or [email me](mailto:devesh202
 
 ## License
 
-The repository is licensed under the ISC License.
+The repository is licensed under the [ISC License](https://github.com/deve-sh/Syllabus-Tracker/blob/master/LICENSE).
+
+#### Special Attributions
+
+The Image used on the homepage is from [Code Sand Box](https://codesandbox.io) as I couldn't find a better one and just was a bit too lazy to create a good looking one.
