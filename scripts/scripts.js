@@ -53,7 +53,7 @@ function render(){
 		let counter = 0;					// A counter variable to assign the ids to each list item.
 
 		for(let semester in userdata){
-			if(semester.indexOf('Semester')!==-1){
+			if(semester.toLowerCase().indexOf('semester')!==-1){
 				if(Object.keys(userdata[semester]).length <= 0){
 					// Don't waste time on another round of for loops if no units are specified.
 					toRender += `<div class='semestername'>${semester}</div>
