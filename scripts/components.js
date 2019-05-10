@@ -43,6 +43,10 @@ const intro = () => {
 	`;	
 }
 
+// A Rounding Off Function.
+
+const round = (x, n) => parseFloat(Math.round(x * Math.pow(10, n)) / Math.pow(10, n)).toFixed(n);
+
 // User Header Component
 
 const userHeader = (props = {userName:'',year:'2019-20',course:'',progress:0,count:1}) => {
@@ -51,14 +55,67 @@ const userHeader = (props = {userName:'',year:'2019-20',course:'',progress:0,cou
 		<div class='userName'>Hey ${props.userName}</div>
 		<div class='useryear'>Year : <span class='year'>${props.year}</span></div>
 		<div class='usercourse'>Course : <span class='course'>${props.course}</span></div>
-		<br/>
-		Progress : 
-		<div class='userprogress' style='background : linear-gradient(90deg, #0d78cc ${(props.progress/props.count)*100}%, #2c96df ${(props.progress/props.count)*100}%'>
-			${(props.progress/props.count)*100}%
-		</div>
-		<br/>
+		<div id='progressbar'></div>
 		<div align='center'><button onclick="reset()" class='btn btn-danger' style='background: red;'>Reset / Logout</button></div>
 		Your Syllabus : 
 	</div>
 	`;
+}
+
+// Progress Bar Component.
+
+const progressBar = (userdata) => {
+
+	if(typeof userdata !== 'object' || Array.isArray(userdata)){
+		// Invalid Types for userdata.
+
+		throw new Error('Invalid type for userdata.');
+	}
+
+	// Calculating the progress of the user.
+
+	let progress = 0;
+	let count = 1;
+
+	// Calculating the progress of the user.
+	// Sorry this takes 3 for loops, but the execution is fast enough, no worries.
+	// Takes around 0.31 ms on average for 100 runs.
+
+	for(let semester in userdata){
+		if(semester.indexOf('Semester')!==-1){
+			if(Object.keys(userdata[semester]).length > 0){
+				for(let unit in userdata[semester]["Units"]){
+					if(userdata[semester]["Units"][unit].hasOwnProperty("Sub-Units") && userdata[semester]["Units"][unit].isPractical === false){
+						for(let i = 0;i<userdata[semester]["Units"][unit]["Sub-Units"].length;i++){
+							if(userdata[semester]["Units"][unit]["Sub-Units"][i].isComplete === true)
+								progress++;
+							count++;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if(count>1){
+		count -= 1;
+	}
+
+
+	let progressHTML = `
+	<br/>
+		Progress : 
+		<div class='userprogress' style='background : linear-gradient(90deg, #0d78cc ${(progress/count)*100}%, #2c96df ${(progress/count)*100}%'>
+			${round((progress/count)*100,2)}%
+		</div>
+	<br/>`;
+
+	try{
+		$("#progressbar").html(progressHTML);
+	}
+	catch(err){
+		throw new Error(err);
+	}
+
+	// This will render the progress bar.
 }

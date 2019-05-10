@@ -45,31 +45,10 @@ function render(){
 		let userName = userdata.userName;
 		let year = userdata.Year;
 		let course = userdata.Course;
-		let progress = 0;
-		let count = 1;
-
-		// Calculating the progress of the user.
-		// Sorry this takes 3 for loops, but the execution is fast enough, no worries.
-
-		for(let semester in userdata){
-			if(semester.indexOf('Semester')!==-1){
-				if(Object.keys(userdata[semester]).length > 0){
-					for(let unit in userdata[semester]["Units"]){
-						if(userdata[semester]["Units"][unit].hasOwnProperty("Sub-Units") && userdata[semester]["Units"][unit].isPractical === false){
-							for(let i = 0;i<userdata[semester]["Units"][unit]["Sub-Units"].length;i++){
-								if(userdata[semester]["Units"][unit]["Sub-Units"][i].isComplete === true)
-									progress++;
-								count++;
-							}
-						}
-					}
-				}
-			}
-		}
 		
 		// Creating a Render String. Starting with the Intro Tile.
 
-		let toRender = `${userHeader({userName,year,course,progress,count})}`;	// String that will be displayed.
+		let toRender = `${userHeader({userName,year,course})}`;	// String that will be displayed.
 
 		let counter = 0;					// A counter variable to assign the ids to each list item.
 
@@ -124,7 +103,12 @@ function render(){
 			}
 		}
 
-		$("#root").html(toRender);	// Set the HTML of the Root Component to toRender string.
+		try{
+			$("#root").html(toRender);	// Set the HTML of the Root Component to toRender string.
+			progressBar(userdata);		// Render the progress bar seperately as it will need dynamic updation.
+		}catch(err){
+			throw new Error(err);
+		}
 	}
 	else{
 		showLoginScreen();	// Show the login screen again if the user isn't logged in.
@@ -319,6 +303,10 @@ function registerCompletion(event){
 		// Set the new localStorage item.
 
 		localStorage.setItem('syllabusTracker',JSON.stringify(syllabus));
+
+		// Rendering the progress bar again.
+
+		progressBar(syllabus);
 	}	
 }
 
